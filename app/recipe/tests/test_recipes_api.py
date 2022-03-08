@@ -211,8 +211,9 @@ class PrivateRecipeApiTests(TestCase):
         tags = recipe.tags.all()
         self.assertEqual(len(tags), 0)
 
+
 class RecipeImageUpdateTests(TestCase):
-    
+
     def setUp(self):
         self.client = APIClient()
         self.user = get_user_model().objects.create_user(
@@ -227,7 +228,7 @@ class RecipeImageUpdateTests(TestCase):
 
     def test_upload_image_to_recipe(self):
         """Test uploading an image to recipe"""
-        url = image_upload_url(self)
+        url = image_upload_url(self.recipe.id)
         with tempfile.NamedTemporaryFile(suffix='.jpg') as ntf:
             img = Image.new('RGB', (10, 10))
             img.save(ntf, format='JPEG')
